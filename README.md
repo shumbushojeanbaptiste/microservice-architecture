@@ -1,6 +1,6 @@
 # Microservices Architecture — Collection & Finance
 
-## Overview ⚙️
+## Overview 
 This repository contains a small Node.js microservices architecture consisting of two services:
 
 - **collection-service** — responsible for collection-related operations and publishing events when collections are created/updated.
@@ -39,7 +39,7 @@ finance-service/
 
 ---
 
-## Design & Event Flow 🔁
+## Design & Event Flow 
 
 1. When the API in `collection-service` creates/updates a collection, it publishes an event to a Redis Stream (e.g., `stream:collections`).
 2. `finance-service` uses a Redis consumer group to read new messages from the stream and process them.
@@ -51,8 +51,7 @@ Key benefits:
 - Persistence and replayability of events
 
 ---
-
-## Redis Streams Best Practices & Tips 💡
+## Redis Streams Best Practices & Tips 
 
 - Use **consumer groups** (XGROUP/XREADGROUP) for scaling multiple consumers while ensuring each message is processed by one consumer in the group.
 - Use **XACK** after successful processing to remove entries from the group's pending list.
@@ -92,7 +91,7 @@ XACK stream:collections finance-group <message-id>
 
 ---
 
-## Implementation notes for this project 🔧
+## Implementation notes for this project 
 
 - `collection-service/services/eventService.js` should wrap Redis publishing (XADD) and follow a small schema (type, id, timestamp, data).
 - `finance-service/services/consumerService.js` should use `XREADGROUP` with a consumer-group name and call `XACK` after successful processing.
@@ -101,7 +100,7 @@ XACK stream:collections finance-group <message-id>
 
 ---
 
-## Deployment & Operations 🚀
+## Deployment & Operations 
 
 - Run Redis as a managed service for production (Azure Redis Cache, AWS ElastiCache) or a dedicated cluster.
 - Use Docker and `docker-compose` for local dev. Example for local dev:
@@ -112,7 +111,7 @@ XACK stream:collections finance-group <message-id>
 
 ---
 
-## Developer tips & debugging 🐞
+## Developer tips & debugging 
 
 - To inspect the stream and PEL:
   - `XRANGE stream:collections - +` — list entries
@@ -139,7 +138,7 @@ NODE_ENV=development
 
 ---
 
-## Troubleshooting checklist ⚠️
+## Troubleshooting checklist 
 
 - Consumers not receiving messages: ensure consumer group exists and consumers use the same group name.
 - Messages stuck in PEL: check consumer health, claim messages, and review stack traces for processing errors.
@@ -148,7 +147,7 @@ NODE_ENV=development
 
 ---
 
-## Further improvements ✅
+## Further improvements 
 
 - Add event schema validation (JSON Schema) on producer/consumer boundaries.
 - Implement dead-letter queues and visibility timeouts.
@@ -162,4 +161,4 @@ If you'd like, I can:
 
 ---
 
-**Happy coding!** If you want, tell me which option to add next (compose file, scripts, or tests) and I'll implement it. ✨
+**Happy coding!** If you want, tell me which option to add next (compose file, scripts, or tests) and I'll implement it. 
