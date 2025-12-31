@@ -1,0 +1,72 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+
+# Coverage and test output
+coverage/
+.nyc_output/
+
+# Build output
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / editor folders
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Docker
+docker-compose.override.yml
+.Dockerfile
+.docker/
+
+# PM2
+pids/
+pm-debug.log
+pm2.log
+
+# Redis persistence files
+dump.rdb
+appendonly.aof
+
+# Misc
+*.tgz
+*.gz
+
+# Service-specific (ignore logs, temp, and node_modules inside each service)
+**/node_modules/
+**/logs/
+**/*.log
+
+# Lock files (if you prefer to ignore lock files, uncomment)
+# package-lock.json
+# yarn.lock
+
+# End of .gitignore
